@@ -20,6 +20,13 @@ const routes = [
       path: '/categories/list',
       name: 'CategoryList',
       component: CategoryList
+    },
+    {
+      path: '/categories/edit/:id',
+      name: 'CategoryEdit',
+      component: CategoryEdit,
+      // props: true 表示把任何url参数，比如id注入到CategoryEdit页面，在CategoryEdit页面可以直接使用变量id，通过props接收
+      props: true
     }]
   }
 ]
