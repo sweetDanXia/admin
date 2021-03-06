@@ -44,7 +44,7 @@ export default {
     afterUpload(res) {
       this.model.icon = res.url;
       // 赋值的数据主体 赋值的属性 赋值的内容
-      // this.$set(this.model, res.url);
+      // this.$set(this.model, "icon", res.url);
     },
     async fetch() {
       const res = await this.$http.get(`/rest/items/${this.id}`);
