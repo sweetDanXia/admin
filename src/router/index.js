@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Main from '../views/Main.vue'
 import CategoryEdit from '../views/CategoryEdit.vue'
 import CategoryList from '../views/CategoryList.vue'
+import ItemEdit from '../views/ItemEdit.vue'
+import ItemList from '../views/ItemList.vue'
 
 Vue.use(VueRouter)
 
@@ -26,6 +28,22 @@ const routes = [
       name: 'CategoryEdit',
       component: CategoryEdit,
       // props: true 表示把任何url参数，比如id注入到CategoryEdit页面，在CategoryEdit页面可以直接使用变量id，通过props接收
+      props: true
+    },
+    {
+      path: '/items/create',
+      name: 'ItemEdit',
+      component: ItemEdit
+    },
+    {
+      path: '/items/list',
+      name: 'ItemEdit',
+      component: ItemList
+    },
+    {
+      path: '/items/edit/:id',
+      name: 'ItemEdit',
+      component: ItemEdit,
       props: true
     }]
   }

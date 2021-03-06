@@ -1,5 +1,5 @@
 <template>
-  <div class="categoryCreate">
+  <div>
     <h1>{{ id ? "编辑" : "新建" }}分类</h1>
     <!-- 想要横向排列的话，可以给el-form加label-width -->
     <!-- 点击保存时加上@submit.native.prevent="save"，native表示原生表单，prevent表示阻止默认提交，不要跳转页面 -->
