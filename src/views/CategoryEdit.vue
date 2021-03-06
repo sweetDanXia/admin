@@ -40,21 +40,21 @@ export default {
   },
   methods: {
     async fetch() {
-      const res = await this.$http.get(`/categories/${this.id}`);
+      const res = await this.$http.get(`/rest/categories/${this.id}`);
       this.model = res.data;
     },
     // 获取分类列表接口作为上级分类下拉框来源数据
     async fetchParentsOptions() {
-      const res = await this.$http.get(`/categories`);
+      const res = await this.$http.get(`/rest/categories`);
       this.parents = res.data;
     },
     async save() {
       let res;
       if (this.id) {
-        res = await this.$http.put(`/categories/${this.id}`, this.model);
+        res = await this.$http.put(`/rest/categories/${this.id}`, this.model);
       } else {
         // 平时可能会用.then()写回调函数，我们可以用async await将异步回调函数写法写成类似同步的写法
-        res = await this.$http.post("categories", this.model);
+        res = await this.$http.post("/rest/categories", this.model);
       }
       this.$router.push("/categories/list");
       if (res && res.status == 200) {
