@@ -2,7 +2,7 @@
   <div>
     <el-table :data="tableData">
       <el-table-column prop="_id" label="ID" width="240"> </el-table-column>
-      <el-table-column prop="userName" label="用户名"> </el-table-column>
+      <el-table-column prop="username" label="用户名"> </el-table-column>
       <el-table-column fixed="right" label="操作" width="100">
         <template slot-scope="scope">
           <el-button
@@ -33,7 +33,7 @@ export default {
       this.tableData = res.data;
     },
     async remove(row) {
-      this.$confirm(`是否确定删除管理员 ${row.userName}?`, "提示", {
+      this.$confirm(`是否确定删除管理员 ${row.username}?`, "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning",
