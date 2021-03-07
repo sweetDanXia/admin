@@ -4,14 +4,23 @@
     <el-form label-width="120px" @submit.native.prevent="save">
       <el-form-item label="所属分类">
         <el-select v-model="model.categories" multiple>
-          <el-option v-for="item in categories" :key="item._id" :label="item.name" :value="item._id"></el-option>
+          <el-option
+            v-for="item in categories"
+            :key="item._id"
+            :label="item.name"
+            :value="item._id"
+          ></el-option>
         </el-select>
       </el-form-item>
       <el-form-item label="标题">
         <el-input v-model="model.title"></el-input>
       </el-form-item>
       <el-form-item label="详情">
-        <el-input v-model="model.body" type="textarea"></el-input>
+        <vue-editor
+          v-model="model.body"
+          seCustomImageHandler
+          @image-added="handleImageAdded"
+        ></vue-editor>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -21,24 +30,36 @@
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 export default {
   props: {
     id: {},
+  },
+  components: {
+    VueEditor,
   },
   data() {
     return {
       model: {
         title: "",
-        categories:[]
+        categories: [],
       },
-      categories:[]
+      categories: [],
     };
   },
   created() {
-    this.fetchCategories()
+    this.fetchCategories();
     this.id && this.fetch();
   },
   methods: {
+    async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
+      var formData = new FormData();
+      // 将image字段改成file，和其他上传字段一样
+      formData.append("file", file);
+      const res = await this.$http.post("/upload", formData);
+      Editor.insertEmbed(cursorLocation, "image", res.data.url);
+      resetUploader();
+    },
     async fetch() {
       const res = await this.$http.get(`/rest/articles/${this.id}`);
       this.model = res.data;
